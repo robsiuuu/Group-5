@@ -15,19 +15,19 @@ Make it easy for students to find and attend campus events, help organizers mana
 
 ## App Functions  
 1. Customer (Students & University Members)
-Create/Modify Profile – Users can create an account and update personal details. 
-View Available Events – Browse and search for campus events.
-Subscribe to Events – Register for events and receive reminders.  
-Write Reviews for Events – Share experiences, rate events, and provide feedback for organizers.  
+- Create/Modify Profile – Users can create an account and update personal details. 
+- View Available Events – Browse and search for campus events.
+- Subscribe to Events – Register for events and receive reminders.  
+- Write Reviews for Events – Share experiences, rate events, and provide feedback for organizers.  
 
 2. Provider (Event Organizers & University Clubs)   
-Create/Update/Delete Profile – Set up and manage an organizer account.  
-Create Events – Add and update event details.  
-View Attendee Stats – See how many people signed up.  
-Reply to Reviews – Respond to event feedback.
+- Create/Update/Delete Profile – Set up and manage an organizer account.  
+- Create Events – Add and update event details.  
+- View Attendee Stats – See how many people signed up.  
+- Reply to Reviews – Respond to event feedback.
 
 3. SysAdmin (University Admins & Moderators)  
-Manage User Access – Approve or remove accounts.  
-Monitor Events – Ensure events follow guidelines.  
-Moderate Reviews – Remove inappropriate or spam reviews.  
-View Stats – Track app usage and event participation.  
+- Manage User Access – Approve or remove accounts.  
+- Monitor Events – Ensure events follow guidelines.  
+- Moderate Reviews – Remove inappropriate or spam reviews.  
+- View Stats – Track app usage and event participation.  
