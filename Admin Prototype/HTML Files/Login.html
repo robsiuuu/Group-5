@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href='https://fonts.googleapis.com/css?family=Merriweather' rel='stylesheet'>
+</head>
+<body>
+
+<div class="banner">
+    <a href="AdminScreen.html" class="logo"><img src="/Images/logo.png" alt="Logo" height="40"></a>
+    <div class="tabs">
+        <a href="#" class="tab">
+            <img src="/Images/search_icon.png" alt="Login" height="20">
+        </a>
+        <a href="#" class="tab">Events</a>
+        <a href="WhoAreYou.html" class="tab">Login</a>
+    </div>
+</div>
+
+<div class="login-container">
+    <h2>Login</h2>
+    <form action="UserManagement.html" method="POST">
+        <div class="input-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+        <div class="input-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <button type="submit" class="login-btn">Login</button>
+        <p class="register-link">Don't have an account? <a href="">Sign up</a></p>
+    </form>
+</div>
+
+
+</body>
+</html>
