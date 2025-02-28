@@ -1,73 +1,94 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="h-full" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Manage Users</title>
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="/style.css">
     <link href='https://fonts.googleapis.com/css?family=Merriweather' rel='stylesheet'>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="h-full">
 
-<div class="banner">
-    <a href="AdminScreen.html" class="logo"><img src="/Images/logo.png" alt="Logo" height="40"></a>
-    <div class="tabs">
-        <a href="#" class="tab">
-            <img src="/Images/search_icon.png" alt="Login" height="20">
-        </a>
-        <a href="#" class="tab">Events</a>
-        <a href="WhoAreYou.html" class="tab">Login</a>
+<div class="bg-white-50 py-24 sm:py-32">
+    <div class="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
+        <h2 class="text-center text-base/7 font-semibold text-indigo-600">Welcome, Admin</h2>
+        <p class="mx-auto mt-2 max-w-lg text-center text-4xl font-semibold tracking-tight text-balance text-gray-950 sm:text-5xl">
+            User Management</p>
+        <div class="mt-10 grid gap-4 sm:mt-16 lg:grid-cols-3 lg:grid-rows-2">
+            <!-- Left Box -->
+            <div class="relative lg:row-span-2">
+                <div class="absolute inset-px rounded-lg bg-white lg:rounded-l-[2rem]"></div>
+                <div class="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] lg:rounded-l-[calc(2rem+1px)]">
+                    <div class="px-8 pt-8 pb-8 sm:px-10 sm:pt-10 sm:pb-8">
+                    <p class="mt-2 text-lg font-medium tracking-tight text-gray-950 max-lg:text-center">Users
+                            required to be reviewed</p>
+                        <ul class="mt-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center">
+                            <li class="flex items-center space-x-4">
+                                <img class="w-10 h-10 rounded-full" src="/Images/john_doe.png" alt="John Doe">
+                                <a href="/profile/john_doe" class="text-indigo-600 hover:underline">John Doe</a>
+                            </li>
+                            <li class="flex items-center space-x-4 mt-2">
+                                <img class="w-10 h-10 rounded-full" src="/Images/jane_doe.png" alt="Jane Doe">
+                                <a href="/profile/jane_Doe" class="text-indigo-600 hover:underline">Jane Doe</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="pointer-events-none absolute inset-px rounded-lg ring-1 shadow-sm ring-black/5 lg:rounded-l-[2rem]"></div>
+            </div>
+            <!-- Middle Box -->
+            <div class="relative lg:row-span-2">
+                <div class="absolute inset-px rounded-lg bg-white"></div>
+                <div class="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)]">
+                    <div class="px-8 pt-8 pb-8 sm:px-10 sm:pt-10 sm:pb-8">
+                    <p class="mt-2 text-lg font-medium tracking-tight text-gray-950 max-lg:text-center">Active
+                            Users</p>
+                        <ul class="mt-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center">
+                            <li class="flex items-center space-x-4">
+                                <img class="w-10 h-10 rounded-full" src="/Images/adrian_sam.png"
+                                     alt="Adrian">
+                                <a href="/profile/adrian_sam" class="text-indigo-600 hover:underline">Adrian
+                                    Sam</a>
+                            </li>
+                            <li class="flex items-center space-x-4 mt-2">
+                                <img class="w-10 h-10 rounded-full" src="/Images/alex_crubaugh.png" alt="Alex Crubaugh">
+                                <a href="/profile/alex_crubaugh" class="text-indigo-600 hover:underline">Alex Crubaugh</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="pointer-events-none absolute inset-px rounded-lg ring-1 shadow-sm ring-black/5"></div>
+            </div>
+            <!-- Right Box -->
+            <div class="relative lg:row-span-2">
+                <div class="absolute inset-px rounded-lg bg-white lg:rounded-r-[2rem]"></div>
+                <div class="relative flex h-full flex-col overflow-hidden rounded-[calc(var(--radius-lg)+1px)] lg:rounded-r-[calc(2rem+1px)]">
+                    <div class="px-8 pt-8 pb-8 sm:px-10 sm:pt-10 sm:pb-8">
+                    <p class="mt-2 text-lg font-medium tracking-tight text-gray-950 max-lg:text-center">Banned
+                            Users</p>
+                        <ul class="mt-2 max-w-lg text-sm/6 text-gray-600 max-lg:text-center">
+                            <li class="flex items-center space-x-4">
+                                <img class="w-10 h-10 rounded-full" src="/Images/herobrine.png" alt="Herobrine">
+                                <a href="/profile/herobrine" class="text-red-600 hover:underline">Herobrine</a>
+                            </li>
+                            <li class="flex items-center space-x-4 mt-2">
+                                <img class="w-10 h-10 rounded-full" src="/Images/princess_bubblegum.png" alt="Princess Bubblegum">
+                                <a href="/profile/princess_bubblegum" class="text-red-600 hover:underline">Princess Bubblegum</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="pointer-events-none absolute inset-px rounded-lg ring-1 shadow-sm ring-black/5 lg:rounded-r-[2rem]"></div>
+            </div>
+        </div>
     </div>
 </div>
 
-<div class="admin-container">
-    <h2>Admin - User Management</h2>
-
-    <table>
-        <thead>
-        <tr>
-            <th>Username</th>
-            <th>Role</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
-
-        <!-- examples -->
-        <tbody>
-        <tr>
-            <td>National Basketball Association Young Boy</td>
-            <td>Customer</td>
-            <td>
-                <button class="action-btn confirm-btn">Confirm</button>
-                <button class="action-btn delete-btn">Delete</button>
-            </td>
-        </tr>
-
-        <tr>
-            <td>yabadabadoo (artist who can't sing)</td>
-            <td>Organizer</td>
-            <td>
-                <button class="action-btn confirm-btn">Confirm</button>
-                <button class="action-btn delete-btn">Delete</button>
-            </td>
-        </tr>
-
-        <tr>
-            <td>Its Me</td>
-            <td>Admin</td>
-            <td>
-                <button class="action-btn confirm-btn">Confirm</button>
-                <button class="action-btn delete-btn">Delete</button>
-            </td>
-        </tr>
-
-        </tbody>
-    </table>
-</div>
-
-<div class="pagination">
-    <span>Page 1</span>
-    <a href="EventsMangement.html" class="next-btn">Next →</a>
-
+<div class="absolute bottom-10 w-full text-center">
+    <div class="pagination">
+        <span class="mx-4">Page 1</span>
+        <a href="EventsMangement.html" class="text-indigo-600 hover:underline">Next →</a>
+    </div>
 </div>
 
 </body>
