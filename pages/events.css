@@ -1,0 +1,20 @@
+.header_dashboard {
+    margin-top: 60px;
+}
+.dash_header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.hero_section {
+    margin-top: 20px;
+}
+
+.events_header{
+    text-align: center !important;
+}
+
+.a_link {
+    padding: none !important;
+    margin: none !important;
+}
