@@ -1,5 +1,6 @@
 package com.example.UniVentsAdmin.Event;
 
+import com.example.UniVentsAdmin.User.User;
 import jakarta.persistence.*;
 import java.util.Date;
 
@@ -9,8 +10,11 @@ public class Event {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int creatorId;
     private int eventId;
+
+    @ManyToOne
+    @JoinColumn(name = "creatorId", nullable = false)
+    private User creator; // References the User who created the event
 
     @Column(nullable = false)
     private String username;
@@ -19,31 +23,28 @@ public class Event {
     private String eventGenre;
 
     @Column(nullable = false)
-    Date eventDate = new Date();
-    Date eventTime = new Date();
+    private Date eventDate = new Date();
 
     // Constructors
-    public Event(int creatorId, int eventId, String username, String eventName, String eventLocation, String eventGenre, Date eventDate, Date eventTime) {
-        this.creatorId = creatorId;
-        this.eventId = eventId;
+    public Event(User creator, String username, String eventName, String eventLocation, String eventGenre, Date eventDate) {
+        this.creator = creator;
         this.username = username;
         this.eventName = eventName;
         this.eventLocation = eventLocation;
         this.eventGenre = eventGenre;
         this.eventDate = eventDate;
-        this.eventTime = eventTime;
     }
 
-    public Event(){
+    public Event() {
     }
 
-    // getters and setters
-    public int getCreatorId() {
-        return creatorId;
+    // Getters and setters
+    public User getCreator() {
+        return creator;
     }
 
-    public void setCreatorId(int creatorId) {
-        this.creatorId = creatorId;
+    public void setCreator(User creator) {
+        this.creator = creator;
     }
 
     public int getEventId() {
@@ -94,26 +95,16 @@ public class Event {
         this.eventDate = eventDate;
     }
 
-    public Date getEventTime() {
-        return eventTime;
-    }
-
-    public void setEventTime(Date eventTime) {
-        this.eventTime = eventTime;
-    }
-
     @Override
     public String toString() {
         return "Event{" +
-                "creatorId=" + creatorId +
-                ", eventId=" + eventId +
+                "eventId=" + eventId +
+                ", creator=" + creator +
                 ", username='" + username + '\'' +
                 ", eventName='" + eventName + '\'' +
                 ", eventLocation='" + eventLocation + '\'' +
                 ", eventGenre='" + eventGenre + '\'' +
                 ", eventDate=" + eventDate +
-                ", eventTime=" + eventTime +
                 '}';
     }
-
 }

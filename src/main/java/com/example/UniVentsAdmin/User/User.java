@@ -2,7 +2,7 @@ package com.example.UniVentsAdmin.User;
 
 import jakarta.persistence.*;
 import java.util.Date;
-import java.awt.*;
+
 
 @Entity
 @Table(name = "users")
@@ -21,10 +21,9 @@ public class User {
 
     @Column(nullable = false)
     Date lastUpdatedAt = new Date();
-    Image profilePic = Toolkit.getDefaultToolkit().getImage("");
 
     // Constructors
-    public User(int userId, String username, String email, String password, String role, String accountStatus, Date lastUpdatedAt, Image profilePic) {
+    public User(int userId, String username, String email, String password, String role, String accountStatus, Date lastUpdatedAt) {
         this.userId = userId;
         this.username = username;
         this.email = email;
@@ -32,7 +31,6 @@ public class User {
         this.role = role;
         this.accountStatus = accountStatus;
         this.lastUpdatedAt = lastUpdatedAt;
-        this.profilePic = profilePic;
     }
 
     // Always include a no-argument constructor.
@@ -96,14 +94,6 @@ public class User {
         this.lastUpdatedAt = lastUpdatedAt;
     }
 
-    public Image getProfilePic() {
-        return profilePic;
-    }
-
-    public void setProfilePic(Image profilePic) {
-        this.profilePic = profilePic;
-    }
-
     @Override
     public String toString() {
         return "Users{" +
@@ -114,7 +104,6 @@ public class User {
                 ", role='" + role + '\'' +
                 ", accountStatus='" + accountStatus + '\'' +
                 ", lastUpdatedAt=" + lastUpdatedAt +
-                ", profilePic=" + profilePic +
                 '}';
     }
 
