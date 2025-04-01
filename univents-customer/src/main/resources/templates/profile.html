@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+
+<!-- Navbar -->
+<nav class="bg-blue-950 border-b-4 border-black fixed top-0 w-full z-50">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="flex h-[7vw] items-center justify-between">
+            <div class="flex items-center">
+                <img class="h-32 w-32" src="/UniVents.png" alt="UniVents">
+                <div class="ml-10 flex items-baseline space-x-4">
+                    <a href="home.html" class="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-blue-900">Dashboard</a>
+                    <a href="view-events.html" class="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-blue-900">View Events</a>
+                    <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-blue-900">About Us</a>
+                </div>
+            </div>
+            <div class="ml-4 flex items-center space-x-4">
+                <a href="profile.html" class="rounded-md px-6 py-2 bg-gray-800 text-white hover:text-red">Profile</a>
+                <button id="logoutButton" class="rounded-md px-6 py-2 bg-red-600 text-white hover:bg-red-700">Log Out</button>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Profile Section -->
+<div class="mt-[8vw] flex justify-center items-center">
+    <div class="bg-white p-8 rounded-lg shadow-lg w-[90%] max-w-2xl border border-gray-300">
+        <h3 class="text-lg font-semibold text-gray-900 text-center">Profile Details</h3>
+        <form class="space-y-4 mt-4" id="profileForm">
+            <!-- Username -->
+            <div>
+                <label for="username" class="block text-sm font-medium text-gray-900">Username</label>
+                <input type="text" id="username" class="block w-full rounded-md px-3 py-2 border border-gray-300" required>
+            </div>
+
+            <!-- Email -->
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-900">Email</label>
+                <input type="email" id="email" class="block w-full rounded-md px-3 py-2 border border-gray-300" required>
+            </div>
+
+            <!-- Current Password -->
+            <div>
+                <label for="current-password" class="block text-sm font-medium text-gray-900">Current Password</label>
+                <input type="password" id="current-password" class="block w-full rounded-md px-3 py-2 border border-gray-300">
+            </div>
+
+            <!-- New Password -->
+            <div>
+                <label for="new-password" class="block text-sm font-medium text-gray-900">New Password</label>
+                <input type="password" id="new-password" class="block w-full rounded-md px-3 py-2 border border-gray-300">
+            </div>
+
+            <!-- Confirm New Password -->
+            <div>
+                <label for="confirm-password" class="block text-sm font-medium text-gray-900">Confirm New Password</label>
+                <input type="password" id="confirm-password" class="block w-full rounded-md px-3 py-2 border border-gray-300">
+            </div>
+
+            <!-- Save Button -->
+            <div class="flex justify-center mt-4">
+                <button type="button" id="saveProfile" class="bg-blue-950 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
+                    Save Profile
+                </button>
+            </div>
+        </form>
+
+        <!-- Success/Error Messages -->
+        <p id="profileMessage" class="text-center text-sm mt-4"></p>
+    </div>
+</div>
+
+<!-- JavaScript for Profile Updates -->
+<script>
+    // Get the logged-in user's ID from localStorage
+    const userId = localStorage.getItem("loggedInUserId");
+
+    if (!userId) {
+        window.location.href = "/login"; // Redirect to login if not logged in
+    }
+
+    // Load user data when profile page opens
+    window.onload = function () {
+        fetch(`/api/profile/${userId}`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("username").value = data.username;
+                document.getElementById("email").value = data.email;
+            })
+            .catch(error => console.error("Error loading profile:", error));
+    };
+
+    // Save profile changes
+    document.getElementById("saveProfile").addEventListener("click", function () {
+        let newUsername = document.getElementById("username").value;
+        let newEmail = document.getElementById("email").value;
+        let currentPassword = document.getElementById("current-password").value;
+        let newPassword = document.getElementById("new-password").value;
+        let confirmPassword = document.getElementById("confirm-password").value;
+
+        // Check if a new password is entered and it matches confirmation
+        if (newPassword && newPassword !== confirmPassword) {
+            document.getElementById("profileMessage").textContent = "New passwords do not match!";
+            document.getElementById("profileMessage").classList.add("text-red-600");
+            return;
+        }
+
+        // Create the profile update request object
+        let profileData = {
+            username: newUsername,
+            email: newEmail
+        };
+
+        // Include the new password only if it's entered
+        if (newPassword) {
+            profileData.password = newPassword;
+        }
+
+        // Send the PUT request with current password as a request parameter
+        fetch(`/api/profile/${userId}?currentPassword=${encodeURIComponent(currentPassword)}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(profileData)
+        })
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById("profileMessage").textContent = data;
+            document.getElementById("profileMessage").classList.add("text-green-600");
+        })
+        .catch(error => console.error("Error updating profile:", error));
+    });
+
+    // Logout function
+    document.getElementById("logoutButton").addEventListener("click", function () {
+        localStorage.removeItem("loggedInUserId");
+        localStorage.removeItem("loggedInUsername");
+        window.location.href = "/login"; // Redirect to login page
+    });
+</script>
+
+</body>
+</html>

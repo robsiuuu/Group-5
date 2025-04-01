@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html class="h-full bg-gray-50" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="h-full">
+
+<!-- Navbar -->
+<nav class="bg-blue-950 border-b-4 border-black fixed top-0 w-full z-50">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="flex h-[7vw] items-center justify-between">
+            <div class="flex items-center">
+                <img class="h-32 w-32" src="/UniVents.png" alt="UniVents">
+                <div class="ml-10 flex items-baseline space-x-4">
+                    <a href="home.html" class="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-blue-900">Dashboard</a>
+                    <a href="view-events.html" class="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-blue-900">View Events</a>
+                    <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-blue-900">About Us</a>
+                </div>
+            </div>
+            <div class="ml-4 flex items-center space-x-4">
+                <a href="/login" class="rounded-md px-6 py-2 bg-gray-800 text-white hover:text-red">Log In</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Sign Up Form -->
+<div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8 mt-[100px]">
+    <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+        <img class="mx-auto h-16 w-auto" src="/logo.png" alt="UniVents Logo">
+        <h2 class="mt-6 text-center text-2xl font-bold tracking-tight text-gray-900">Create Your Account</h2>
+    </div>
+
+    <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+        <form class="space-y-6" id="signupForm">
+            <div>
+                <label for="username" class="block text-sm font-medium text-gray-900">Username</label>
+                <input type="text" name="username" id="full-name" required class="block w-full rounded-md px-3 py-2 text-base border border-gray-300 focus:ring-2 focus:ring-indigo-600">
+            </div>
+
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-900">Email address</label>
+                <input type="email" name="email" id="email" required class="block w-full rounded-md px-3 py-2 text-base border border-gray-300 focus:ring-2 focus:ring-indigo-600">
+            </div>
+
+            <div>
+                <label for="password" class="block text-sm font-medium text-gray-900">Password</label>
+                <input type="password" name="password" id="password" required class="block w-full rounded-md px-3 py-2 text-base border border-gray-300 focus:ring-2 focus:ring-indigo-600">
+            </div>
+
+            <div>
+                <label for="confirm-password" class="block text-sm font-medium text-gray-900">Confirm Password</label>
+                <input type="password" name="confirmPassword" id="confirm-password" required class="block w-full rounded-md px-3 py-2 text-base border border-gray-300 focus:ring-2 focus:ring-indigo-600">
+            </div>
+
+            <div>
+                <button type="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white hover:bg-indigo-500 transition duration-200">Sign Up</button>
+            </div>
+        </form>
+
+        <p id="signupMessage" class="text-center text-sm mt-4"></p>
+
+        <p class="mt-6 text-center text-sm text-gray-500">Already have an account? <a href="/login" class="font-semibold text-indigo-600 hover:text-indigo-500">Sign in</a></p>
+    </div>
+</div>
+
+<!-- JavaScript for Handling Signup -->
+<script>
+    document.getElementById("signupForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        let formData = {
+            email: document.getElementById("email").value,
+            username: document.getElementById("full-name").value,
+            password: document.getElementById("password").value,
+            confirmPassword: document.getElementById("confirm-password").value // Now correctly included
+        };
+
+        console.log("Form Data Sent:", formData); // Debugging step
+
+        fetch("/api/signup", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(formData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            let messageElement = document.getElementById("signupMessage");
+            messageElement.textContent = data.message;
+            messageElement.classList.remove("text-green-600", "text-red-600");
+            messageElement.classList.add(data.message.includes("successfully") ? "text-green-600" : "text-red-600");
+
+            if (data.message.includes("successfully")) {
+                setTimeout(() => { window.location.href = "/login"; }, 2000);
+            }
+        })
+        .catch(error => console.error("Error:", error));
+    });
+</script>
+
+</body>
+</html>
