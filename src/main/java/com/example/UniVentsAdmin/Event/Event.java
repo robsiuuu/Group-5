@@ -2,6 +2,8 @@ package com.example.UniVentsAdmin.Event;
 
 import com.example.UniVentsAdmin.User.User;
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.*;
+
 import java.util.Date;
 
 @Entity
@@ -14,10 +16,10 @@ public class Event {
 
     @ManyToOne
     @JoinColumn(name = "creatorId", nullable = false)
+    @JsonIgnore // This prevents Jackson from serializing the full User object
     private User creator; // References the User who created the event
 
     @Column(nullable = false)
-    private String username;
     private String eventName;
     private String eventLocation;
     private String eventGenre;
@@ -26,9 +28,8 @@ public class Event {
     private Date eventDate = new Date();
 
     // Constructors
-    public Event(User creator, String username, String eventName, String eventLocation, String eventGenre, Date eventDate) {
+    public Event(User creator, String eventName, String eventLocation, String eventGenre, Date eventDate) {
         this.creator = creator;
-        this.username = username;
         this.eventName = eventName;
         this.eventLocation = eventLocation;
         this.eventGenre = eventGenre;
@@ -39,6 +40,11 @@ public class Event {
     }
 
     // Getters and setters
+    @JsonProperty("creator")
+    public String getCreatorUsername() {
+        return creator != null ? creator.getUsername() : null;
+    }
+
     public User getCreator() {
         return creator;
     }
@@ -53,14 +59,6 @@ public class Event {
 
     public void setEventId(int eventId) {
         this.eventId = eventId;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getEventName() {
@@ -100,11 +98,11 @@ public class Event {
         return "Event{" +
                 "eventId=" + eventId +
                 ", creator=" + creator +
-                ", username='" + username + '\'' +
                 ", eventName='" + eventName + '\'' +
                 ", eventLocation='" + eventLocation + '\'' +
                 ", eventGenre='" + eventGenre + '\'' +
                 ", eventDate=" + eventDate +
                 '}';
     }
+
 }

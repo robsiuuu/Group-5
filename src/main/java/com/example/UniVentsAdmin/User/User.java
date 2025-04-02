@@ -3,7 +3,6 @@ package com.example.UniVentsAdmin.User;
 import jakarta.persistence.*;
 import java.util.Date;
 
-
 @Entity
 @Table(name = "users")
 public class User {

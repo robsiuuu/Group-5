@@ -1,7 +1,8 @@
 package com.example.UniVentsAdmin.Review;
 
 import com.example.UniVentsAdmin.User.User;
-import com.example.UniVentsAdmin.Event.Event; // Import Event
+import com.example.UniVentsAdmin.Event.Event;
+import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 
 @Entity
@@ -9,7 +10,7 @@ import jakarta.persistence.*;
 public class Review {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-generates reviewId
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int reviewId;
 
     private int rating; // Stores the 1-5 rating
@@ -17,6 +18,7 @@ public class Review {
 
     @ManyToOne
     @JoinColumn(name = "reviewerId", nullable = false)
+    @JsonIgnore
     private User reviewer; // References the User who made the review
 
     @ManyToOne
@@ -35,6 +37,11 @@ public class Review {
     }
 
     // Getters and setters
+    @JsonProperty("reviewer")
+    public String getReviewerUsername() {
+        return reviewer != null ? reviewer.getUsername() : null;
+    }
+
     public int getReviewId() {
         return reviewId;
     }

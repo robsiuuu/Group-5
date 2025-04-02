@@ -1,11 +1,8 @@
 package com.example.UniVentsAdmin.Stats;
 
-import com.example.UniVentsAdmin.Review.Review;
-import com.example.UniVentsAdmin.Review.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
+import java.util.*;
 
 @Service
 public class StatsService {
@@ -17,7 +14,7 @@ public class StatsService {
         this.statsRepository = statsRepository;
     }
 
-    // get all reviews
+    // get all stats
     public List<Stats> getAllStats() {
         return statsRepository.findAll();
     }

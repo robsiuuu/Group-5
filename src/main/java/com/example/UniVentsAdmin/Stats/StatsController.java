@@ -1,6 +1,5 @@
 package com.example.UniVentsAdmin.Stats;
 
-import com.example.UniVentsAdmin.Stats.StatsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,10 +16,11 @@ public class StatsController {
         this.statsService = statsService;
     }
 
-    // get all reviews
+    // get all stats
     @GetMapping("/all")
     public Object getAllStats() {
         return new ResponseEntity<>(statsService.getAllStats(), HttpStatus.OK);
     }
+
 
 }
