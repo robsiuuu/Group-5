@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="events.css">
+</head>
+<body class="bg-gray-100">
+
+<nav class="bg-blue-950 border-b-4 border-black fixed top-0 w-full z-50">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="flex h-[7vw] items-center justify-between">
+            <div class="flex items-center">
+                <div>
+                    <a href="home-admin.html">
+                        <img class="h-32 w-32" src="/Images/UniVents.png" alt="UniVents">
+                </div>
+                <div>
+                    <div class="ml-10 flex items-baseline space-x-4 links">
+                        <a href="UserManagement.html"
+                           class="rounded-md underline px-3 py-2 text-sm font-medium text-white">Admin Dashboard</a>
+                        <a href="Stats.html"
+                           class="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-blue-900 hover:text-white">UniVents
+                            Stats</a>
+                        <a href="#"
+                           class="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-blue-900 hover:text-white">View
+                            Events</a>
+                        <a href="#"
+                           class="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-blue-900 hover:text-white">About
+                            Us</a>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="ml-4 flex items-center space-x-4">
+                    <a href="#">
+                        <button type="button"
+                                class="relative rounded-md px-6 py-2 bg-gray-800 p-1 text-white hover:text-red focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                            Profile
+                        </button>
+                    </a>
+                    <a href="#">
+                        <button type="button"
+                                class="relative rounded-md px-6 py-2 bg-gray-800 p-1 text-white hover:text-red focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                            Sign Out
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Profile Section -->
+<div class="mt-[8vw] flex justify-center items-center">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-[90%] max-w-2xl">
+        <div class="text-center">
+            <label for="photo" class="block text-sm font-medium text-gray-900">John Doe</label>
+            <div class="mt-4 relative">
+                <img class="h-24 w-24 rounded-full mx-auto border-2 border-gray-300 shadow-md"
+                     src="/Images/john_doe.png" alt="Profile Picture">
+                <input type="file" name="photo" id="photo"
+                       class="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer">
+            </div>
+        </div>
+
+        <div class="mt-6">
+            <h3 class="text-lg font-semibold text-gray-900">Profile Details</h3>
+            <form class="space-y-4 mt-4" action="#" method="POST">
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-900">Full Name</label>
+                    <input type="text" name="full-name" id="full-name" value="John Doe" readonly>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-900">Email</label>
+                    <input type="text" name="email" id="email" value="JohnDoePork@uncg.edu" readonly>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-900">Active Days</label>
+                    <input type="text" name="active-days" id="active-days"
+                           value="This user has been active for 365 days on UniVents!"
+                           readonly
+                           class="w-full rounded-md">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-900">Amount of events this user have attended</label>
+                    <input type="text" name="events-been-to" id="events-been-to"
+                           value="This user has been to 182 Events on UNCG Campus!"
+                           readonly
+                           class="w-full rounded-md">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-900">This user's reviews:</label>
+                    <textarea id="reviews" readonly class="w-full h-32 rounded-md p-2 border border-gray-300">
+                        "This event was amazing! But there were some issues with the organization."
+                        "The venue was great, but parking was a nightmare."
+                        "Loved the speaker lineup! Definitely attending again."
+                    </textarea>
+                </div>
+
+                <div class="mt-2 flex justify-end space-x-3">
+                    <button class="px-4 py-1.5 text-sm font-medium text-white bg-green-600 rounded-lg hover:bg-green-500">
+                        Approve
+                    </button>
+                    <button class="px-4 py-1.5 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-500">
+                        Reject
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>`

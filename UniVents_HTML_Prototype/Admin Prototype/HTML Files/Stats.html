@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html class="h-full" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>UniVents Stats</title>
+    <link rel="stylesheet" href="/style.css">
+    <link href='https://fonts.googleapis.com/css?family=Merriweather' rel='stylesheet'>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="h-full">
+
+<nav class="bg-blue-950 border-b-4 border-black fixed top-0 w-full z-50">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="flex h-[7vw] items-center justify-between">
+            <div class="flex items-center">
+                <div>
+                    <a href="home-admin.html">
+                        <img class="h-32 w-32" src="/Images/UniVents.png" alt="UniVents">
+                </div>
+                <div>
+                    <div class="ml-10 flex items-baseline space-x-4 links">
+                        <a href="UserManagement.html"
+                           class="rounded-md underline px-3 py-2 text-sm font-medium text-white">Admin Dashboard</a>
+                        <a href="Stats.html"
+                           class="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-blue-900 hover:text-white">UniVents
+                            Stats</a>
+                        <a href="#"
+                           class="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-blue-900 hover:text-white">View
+                            Events</a>
+                        <a href="#"
+                           class="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-blue-900 hover:text-white">About
+                            Us</a>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="ml-4 flex items-center space-x-4">
+                    <a href="#">
+                        <button type="button"
+                                class="relative rounded-md px-6 py-2 bg-gray-800 p-1 text-white hover:text-red focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                            Profile
+                        </button>
+                    </a>
+                    <a href="#">
+                        <button type="button"
+                                class="relative rounded-md px-6 py-2 bg-gray-800 p-1 text-white hover:text-red focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                            Sign Out
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="bg-white-50 py-24 sm:py-32">
+    <div class="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8 flex-grow">
+        <h2 class="text-center text-base/7 font-semibold text-indigo-600">Welcome, Admin</h2>
+        <p class="mx-auto mt-2 max-w-lg text-center text-4xl font-semibold tracking-tight text-balance text-gray-950 sm:text-5xl">
+            UniVents Stats</p>
+        <div class="mt-6 space-y-6">
+            <!-- Total Events -->
+            <div class="p-6 bg-indigo-100 rounded-lg text-center">
+                <p class="text-xl font-semibold text-gray-900">Total Events</p>
+                <p class="text-3xl font-bold text-indigo-600 mt-2">120</p>
+            </div>
+
+            <!-- Registered Users -->
+            <div class="p-6 bg-green-100 rounded-lg text-center">
+                <p class="text-xl font-semibold text-gray-900">Registered Users</p>
+                <p class="text-3xl font-bold text-green-600 mt-2">450</p>
+            </div>
+
+            <!-- Active Events -->
+            <div class="p-6 bg-blue-100 rounded-lg text-center">
+                <p class="text-xl font-semibold text-gray-900">Active Events</p>
+                <p class="text-3xl font-bold text-blue-600 mt-2">15</p>
+            </div>
+
+            <!-- Banned Events -->
+            <div class="p-6 bg-red-100 rounded-lg text-center">
+                <p class="text-xl font-semibold text-gray-900">Banned Events</p>
+                <p class="text-3xl font-bold text-red-600 mt-2">3</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

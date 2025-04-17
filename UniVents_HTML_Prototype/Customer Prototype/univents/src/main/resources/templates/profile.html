@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="events.css">
+</head>
+<body class="bg-gray-100">
+
+<!-- Navbar -->
+<nav class="bg-blue-950 border-b-4 border-black fixed top-0 w-full z-50">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="flex h-[7vw] items-center justify-between">
+            <div class="flex items-center">
+                <img class="h-32 w-32" src="/static/UniVents.png" alt="UniVents">
+                <div class="ml-10 flex items-baseline space-x-4 links">
+                    <a href="home.html" class="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-blue-900">Dashboard</a>
+                    <a href="view-events.html" class="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-blue-900">View Events</a>
+                    <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-blue-900">About Us</a>
+                </div>
+            </div>
+            <div class="ml-4 flex items-center space-x-4">
+                <a href="profile.html" class="rounded-md px-6 py-2 bg-gray-800 text-white hover:text-red">Profile</a>
+                <a href="#" class="rounded-md px-6 py-2 bg-gray-800 text-white hover:text-red">Log Out</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Profile Section -->
+<div class="mt-[8vw] flex justify-center items-center">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-[90%] max-w-2xl">
+        <div class="text-center">
+            <label for="photo" class="block text-sm font-medium text-gray-900">Profile Picture</label>
+            <div class="mt-4 relative">
+                <img class="h-24 w-24 rounded-full mx-auto border-2 border-gray-300 shadow-md" src="/static/default-profile.png" alt="Profile Picture">
+                <input type="file" name="photo" id="photo" class="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer">
+            </div>
+            <button type="button" class="mt-2 rounded-md bg-gray-200 px-3 py-1.5 text-sm font-semibold text-gray-900 shadow-xs hover:bg-gray-300">
+                Change Picture
+            </button>
+        </div>
+
+        <div class="mt-6">
+            <h3 class="text-lg font-semibold text-gray-900">Profile Details</h3>
+            <form class="space-y-4 mt-4" action="#" method="POST">
+                <!-- Full Name -->
+                <div>
+                    <label for="full-name" class="block text-sm font-medium text-gray-900">Full Name</label>
+                    <input type="text" name="full-name" id="full-name" required
+                           class="block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline outline-2 outline-gray-300 focus:outline-4 focus:outline-indigo-600 sm:text-sm"
+                           placeholder="John Doe">
+                </div>
+
+                <!-- Email -->
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-900">Email</label>
+                    <input type="email" name="email" id="email" required
+                           class="block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline outline-2 outline-gray-300 focus:outline-4 focus:outline-indigo-600 sm:text-sm"
+                           placeholder="you@example.com">
+                </div>
+
+                <!-- Username -->
+                <div>
+                    <label for="username" class="block text-sm font-medium text-gray-900">Username</label>
+                    <input type="text" name="username" id="username" required
+                           class="block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline outline-2 outline-gray-300 focus:outline-4 focus:outline-indigo-600 sm:text-sm"
+                           placeholder="yourusername">
+                </div>
+
+                <!-- Change Password -->
+                <div>
+                    <label for="new-password" class="block text-sm font-medium text-gray-900">New Password</label>
+                    <input type="password" name="new-password" id="new-password"
+                           class="block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline outline-2 outline-gray-300 focus:outline-4 focus:outline-indigo-600 sm:text-sm"
+                           placeholder="Enter new password">
+                </div>
+
+                <div>
+                    <label for="confirm-password" class="block text-sm font-medium text-gray-900">Confirm New Password</label>
+                    <input type="password" name="confirm-password" id="confirm-password"
+                           class="block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline outline-2 outline-gray-300 focus:outline-4 focus:outline-indigo-600 sm:text-sm"
+                           placeholder="Confirm new password">
+                </div>
+
+                <!-- Save Button -->
+                <div class="flex justify-center mt-4">
+                    <button type="submit" class="bg-blue-950 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">
+                        Save Profile
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
