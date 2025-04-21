@@ -23,10 +23,24 @@ public class ReviewController {
     private EventService eventService;
 
     @GetMapping("/user/{userId}")
-    public Object getReviewsForUser(@PathVariable int userId) {
+    public Object getReviewsForUser(@PathVariable int userId)
+    {
         return reviewService.getReviewsForUser(userId);
+
     }
 
+    @PostMapping("/create/{eventId}")
+    public Object postReview(@PathVariable int eventId, @RequestBody Review review)
+    {
+        reviewService.addNewReview(review, eventId);
+        return new ResponseEntity<>("Review Posted!", HttpStatus.OK);
+    }
+
+    @DeleteMapping("/delete/{reviewId}")
+    public Object deleteReviewById(@PathVariable int reviewId) {
+        reviewService.deleteReviewById(reviewId);
+        return new ResponseEntity<>("Review deleted successfully.", HttpStatus.OK);
+    }
 
 
 

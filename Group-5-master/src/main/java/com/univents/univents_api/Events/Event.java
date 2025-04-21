@@ -21,7 +21,6 @@ public class Event {
 
     @ManyToOne
     @JoinColumn(name = "creator_id", nullable = false)
-    @JsonManagedReference("event-creator")
     private User creator;
 
     @Column(nullable = false)
@@ -45,6 +44,10 @@ public class Event {
     @OneToMany
     @JsonManagedReference("event-review")
     private List<Review> reviews;
+
+
+    private String eventDescription;
+
 
 
     public Event(int eventId, String eventName, Date eventDate, Date eventTime, String eventLocation) {
@@ -132,6 +135,10 @@ public class Event {
     public void setStatistics(List<Statistic> statistics) {
         this.statistics = statistics;
     }
+
+    public String getEventDescription() {return eventDescription;}
+
+    public void setEventDescription(String eventDescription) {this.eventDescription = eventDescription;}
 
     @Override
     public String toString(){

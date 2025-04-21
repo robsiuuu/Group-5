@@ -36,11 +36,6 @@ public class EventController {
         return new ResponseEntity<>(service.getEventsByLocation(location), HttpStatus.OK);
     }
 
-    //fix
-    @GetMapping("/creator/{creator}")
-    public Object getEventsByUser(@PathVariable User username) {
-        return new ResponseEntity<>(service.getEventsByUser(username), HttpStatus.OK);
-    }
 
     @PostMapping("/create")
     public Object createNewEvent(@RequestBody Event event) {
@@ -50,8 +45,20 @@ public class EventController {
 
     @PutMapping("/update/{eventId}")
     public Object updateEvent(@PathVariable int eventId, @RequestBody Event event) {
-        service.updateEvent(event);
-        return new ResponseEntity<>(service.getEventById(eventId), HttpStatus.OK);
+        Event existingEvent = service.getEventById(eventId);
+
+        if (existingEvent == null) {
+            return new ResponseEntity<>("Event not found", HttpStatus.NOT_FOUND);
+        }
+
+        existingEvent.setEventName(event.getEventName());
+        existingEvent.setEventDescription(event.getEventDescription());
+        existingEvent.setEventLocation(event.getEventLocation());
+        existingEvent.setEventDate(event.getEventDate());
+
+        service.updateEvent(existingEvent);
+
+        return new ResponseEntity<>(existingEvent, HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{eventId}")

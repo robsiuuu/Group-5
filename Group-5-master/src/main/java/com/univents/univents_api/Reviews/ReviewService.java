@@ -31,6 +31,11 @@ public class ReviewService {
         return reviewRepository.findById(userId);
     }
 
+    public Object getReviewById(int reviewId) {
+        return reviewRepository.findById(reviewId);
+    }
+
+
     public void addNewReview(Review review, int eventId) {
         Optional<Event> eventOptional = eventRepository.findById(eventId);
 
@@ -40,5 +45,9 @@ public class ReviewService {
 
         review.setEvent(eventOptional.get());
         reviewRepository.save(review);
+    }
+
+    public void deleteReviewById(int reviewId) {
+        reviewRepository.deleteById(reviewId);
     }
 }

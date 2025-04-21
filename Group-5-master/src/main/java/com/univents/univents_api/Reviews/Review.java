@@ -33,7 +33,7 @@ public class Review {
     @OneToMany(mappedBy = "review", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Reply> replies;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "event_id", nullable = false)
     @JsonBackReference("event-review")
     private Event event;
