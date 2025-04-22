@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-white">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="h-full">
+
+<div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+    <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+        <h2 class="mt-10 text-center text-2xl font-bold tracking-tight text-gray-900">Sign Up</h2>
+        <h5 class="mt-5 text-center tracking-tight text-black-600">Sign up to continue</h5>
+    </div>
+
+    <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+        <form class="space-y-6" action="/users/register" method="post">
+            <div>
+                <label for="username" class="block text-sm font-medium text-gray-900">Username</label>
+                <div class="mt-2">
+                    <input type="text" name="username" id="username" required
+                           class="block w-full rounded-md bg-white px-3 py-1.5 text-gray-900 outline outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-blue-600 sm:text-sm">
+                </div>
+            </div>
+
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-900">Email address</label>
+                <div class="mt-2">
+                    <input type="email" name="email" id="email" autocomplete="email" required
+                           class="block w-full rounded-md bg-white px-3 py-1.5 text-gray-900 outline outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-blue-600 sm:text-sm">
+                </div>
+            </div>
+
+            <div>
+                <label for="password" class="block text-sm font-medium text-gray-900">Password</label>
+                <div class="mt-2">
+                    <input type="password" name="password" id="password" autocomplete="new-password" required
+                           class="block w-full rounded-md bg-white px-3 py-1.5 text-gray-900 outline outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-blue-600 sm:text-sm">
+                </div>
+            </div>
+
+            <div>
+                <label for="confirmPassword" class="block text-sm font-medium text-gray-900">Confirm Password</label>
+                <div class="mt-2">
+                    <input type="password" name="confirmPassword" id="confirmPassword" autocomplete="new-password" required
+                           class="block w-full rounded-md bg-white px-3 py-1.5 text-gray-900 outline outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-blue-600 sm:text-sm">
+                </div>
+            </div>
+
+            <div>
+                <label for="role" class="block text-sm font-medium text-gray-900">Select Role</label>
+                <div class="mt-2">
+                    <select name="role" id="role" required
+                            class="block w-full rounded-md bg-white px-3 py-1.5 text-gray-900 outline outline-1 outline-gray-300 focus:outline-2 focus:outline-blue-600 sm:text-sm">
+                        <option value="" disabled selected>Select your role</option>
+                        <option value="admin">Admin</option>
+                        <option value="user">User</option>
+                        <option value="provider">Provider</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="submit"
+                        class="flex w-full justify-center rounded-md bg-blue-600 px-3 py-1.5 text-sm font-semibold text-white shadow-xs hover:bg-blue-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">
+                    Sign Up
+                </button>
+            </div>
+
+            <div>
+                <a href="/users/loginForm"
+                   class="flex w-full justify-center rounded-md bg-gray-500 px-3 py-1.5 text-sm font-semibold text-white hover:bg-gray-600">
+                    Go Back
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

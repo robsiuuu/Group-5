@@ -2,16 +2,15 @@ package uni_vents.com.univents_backend.Events;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import uni_vents.com.univents_backend.Reviews.Review;
 import uni_vents.com.univents_backend.Statistics.Statistic;
 import uni_vents.com.univents_backend.Users.User;
 import jakarta.persistence.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
-
-
 import java.util.Date;
 import java.util.List;
+import org.springframework.format.annotation.DateTimeFormat;
+
 
 @Entity
 @Table(name = "events")
@@ -29,10 +28,12 @@ public class Event {
 
     @Column(nullable = false)
     @JsonFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date eventDate;
 
     @Column(nullable = false)
-    @JsonFormat(pattern = "HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    @DateTimeFormat(pattern = "HH:mm")
     private Date eventTime;
 
     @Column(nullable = false)
