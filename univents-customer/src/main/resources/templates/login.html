@@ -14,9 +14,9 @@
             <div class="flex items-center">
                 <img class="h-32 w-32" src="/UniVents.png" alt="UniVents">
                 <div class="ml-10 flex items-baseline space-x-4">
-                    <a href="home.html" class="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-blue-900">Dashboard</a>
-                    <a href="view-events.html" class="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-blue-900">View Events</a>
-                    <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-blue-900">About Us</a>
+                    <a href="/" class="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-blue-900">Dashboard</a>
+                    <a href="view-events" class="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-blue-900">View Events</a>
+
                 </div>
             </div>
             <div class="ml-4 flex items-center space-x-4">
@@ -78,7 +78,7 @@
     </div>
 </div>
 
-<!-- JavaScript for Handling Login -->
+<!-- Handles Login -->
 <script>
     document.getElementById("loginForm").addEventListener("submit", function(event) {
         event.preventDefault(); // Prevents page reload
@@ -106,7 +106,7 @@
                 messageElement.classList.add("text-green-600");
 
                 setTimeout(() => {
-                    window.location.href = "/dashboard"; // Redirect after login
+                    window.location.href = "/home"; // Redirect after login
                 }, 2000);
             } else {
                 messageElement.textContent = "Invalid email or password.";

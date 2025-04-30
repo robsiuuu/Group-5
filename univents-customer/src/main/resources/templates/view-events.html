@@ -1,0 +1,136 @@
+<!--
+  The Google Maps API key has been removed for security reasons.
+  This page relies on the API to display the interactive UNCG campus map and event pins.
+  Without a valid API key, the map and event marker features will NOT function as intended.
+  To restore full functionality, replace the placeholder with a valid API key.
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>UNCG Event Map</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        #map {
+          height: 80vh;
+          width: 100%;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+<!-- Navbar -->
+<nav class="bg-blue-950 border-b-4 border-black fixed top-0 w-full z-50">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="flex h-[7vw] items-center justify-between">
+            <div class="flex items-center">
+                <img class="h-32 w-32" src="/UniVents.png" alt="UniVents">
+                <div class="ml-10 flex items-baseline space-x-4 links">
+                    <a id="dashboardLink" class="text-white px-3 py-2 text-sm font-medium hover:bg-blue-900 rounded-md">Dashboard</a>
+                    <a href="profile" id="profileLink" class="text-white px-3 py-2 text-sm font-medium hover:bg-blue-900 rounded-md">Profile</a>
+                </div>
+            </div>
+
+            <div class="ml-4 flex items-center space-x-4">
+                <!-- Buttons for logged in users -->
+                <button onclick="logout()" id="logoutBtn" class="bg-gray-800 text-white px-4 py-2 rounded hover:bg-red-700">Log Out</button>
+
+                <!-- Buttons for visitors -->
+                <a href="/login" id="loginBtn">
+                    <button class="bg-gray-800 text-white px-4 py-2 rounded hover:text-red">Log In</button>
+                </a>
+                <a href="/signup" id="signupBtn">
+                    <button class="bg-gray-800 text-white px-4 py-2 rounded hover:text-red">Sign Up</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Map Container -->
+<div class="pt-[8vw] px-4">
+    <div id="map" class="rounded shadow-md border border-gray-300"></div>
+</div>
+
+<script>
+    // Log out function
+    function logout() {
+      localStorage.removeItem("loggedInUserId");
+      localStorage.removeItem("loggedInUsername");
+      window.location.href = "/login";
+    }
+
+    // Initialize Google Map and demo event
+    function initMap() {
+      const uncgCenter = { lat: 36.0662, lng: -79.8071 };
+
+      const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 16,
+        center: uncgCenter,
+      });
+
+      const demoEvent = {
+        id: 1,
+        title: "Spartan Spring Fest",
+        description: "Music and food trucks!",
+        location: { lat: 36.067458, lng: -79.808483 }
+      };
+
+      const marker = new google.maps.Marker({
+        position: demoEvent.location,
+        map: map,
+        title: demoEvent.title,
+      });
+
+      const infoWindow = new google.maps.InfoWindow();
+
+      marker.addListener('click', function () {
+        const content = `
+          <div>
+            <h2 class="font-bold">${demoEvent.title}</h2>
+            <p class="text-sm mb-2">${demoEvent.description}</p>
+            <button onclick="subscribeToEvent(${demoEvent.id})"
+              class="px-4 py-1 bg-blue-700 text-white rounded hover:bg-blue-800">
+              Subscribe
+            </button>
+          </div>
+        `;
+        infoWindow.setContent(content);
+        infoWindow.open(map, marker);
+      });
+    }
+
+    // Handle subscription
+    function subscribeToEvent(eventId) {
+      const userId = localStorage.getItem("loggedInUserId");
+
+      if (!userId) {
+        alert("You must be logged in to subscribe.");
+        return;
+      }
+
+      fetch("/api/subscriptions", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userId: parseInt(userId), eventId: eventId })
+      })
+      .then(res => res.json())
+      .then(data => {
+        alert(data.message || "Subscription successful!");
+      })
+      .catch(() => {
+        alert("Something went wrong. Try again.");
+      });
+    }
+
+    // Show/hide buttons based on login status
+    const loggedInUserId = localStorage.getItem("loggedInUserId");
+    document.getElementById("dashboardLink").href = loggedInUserId ? "/home" : "/";
+    document.getElementById("logoutBtn").style.display = loggedInUserId ? "inline-block" : "none";
+    document.getElementById("profileLink").style.display = loggedInUserId ? "inline-block" : "none";
+    document.getElementById("loginBtn").style.display = loggedInUserId ? "none" : "inline-block";
+    document.getElementById("signupBtn").style.display = loggedInUserId ? "none" : "inline-block";
+</script>
+<!-- Change the API Key with the actual API Key -->
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY_HERE&callback=initMap" async defer></script>
+</body>
+</html>

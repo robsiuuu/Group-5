@@ -31,7 +31,7 @@ public class ProfileController {
 
         User existingUser = existingUserOptional.get();
 
-        // Debugging: Print stored password and entered current password
+        // Print stored password and entered current password
         System.out.println("Stored Password: " + existingUser.getPassword());
         System.out.println("Entered Current Password: " + currentPassword);
 
@@ -72,5 +72,6 @@ public class ProfileController {
         // Save the updated user
         userService.registerUser(existingUser);
         return ResponseEntity.ok("Profile updated successfully!");
+
     }
 }

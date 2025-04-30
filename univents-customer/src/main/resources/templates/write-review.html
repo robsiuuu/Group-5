@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Write a Review</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+
+<!-- Navbar -->
+<nav class="bg-blue-950 border-b-4 border-black fixed top-0 w-full z-50">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="flex h-[7vw] items-center justify-between">
+      <div class="flex items-center">
+        <img class="h-32 w-32" src="/UniVents.png" alt="UniVents">
+        <div class="ml-10 flex items-baseline space-x-4 links">
+          <a href="home" class="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-blue-900">Dashboard</a>
+          <a href="view-events" class="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-blue-900">View Events</a>
+
+        </div>
+      </div>
+      <div class="ml-4 flex items-center space-x-4">
+        <a href="profile" class="rounded-md px-6 py-2 bg-gray-800 text-white hover:text-red">Profile</a>
+        <a href="#logout" class="rounded-md px-6 py-2 bg-gray-800 text-white hover:text-red">Log Out</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Review Form -->
+<div class="mt-[8vw] flex justify-center items-center">
+  <div class="bg-white p-6 rounded-lg shadow-lg w-[90%] max-w-2xl">
+    <h2 class="text-center text-2xl font-bold text-gray-900">Write a Review</h2>
+    <p class="text-center text-gray-600">Share your experience about the event.</p>
+
+    <form class="mt-6 space-y-4" id="reviewForm">
+      <!-- Event Dropdown -->
+      <div>
+        <label for="eventSelect" class="block text-sm font-medium text-gray-900">Select Event</label>
+        <select id="eventSelect" required
+                class="block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline outline-2 outline-gray-300 focus:outline-4 focus:outline-indigo-600 sm:text-sm">
+          <option value="" disabled selected>Select an event</option>
+        </select>
+      </div>
+
+      <!-- Rating Dropdown -->
+      <div>
+        <label for="rating" class="block text-sm font-medium text-gray-900">Rating</label>
+        <select id="rating" required
+                class="block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline outline-2 outline-gray-300 focus:outline-4 focus:outline-indigo-600 sm:text-sm">
+          <option value="" disabled selected>Select a rating</option>
+          <option value="1">★ 1 - Poor</option>
+          <option value="2">★★ 2 - Fair</option>
+          <option value="3">★★★ 3 - Good</option>
+          <option value="4">★★★★ 4 - Very Good</option>
+          <option value="5">★★★★★ 5 - Excellent</option>
+        </select>
+      </div>
+
+      <!-- Review Text -->
+      <div>
+        <label for="reviewText" class="block text-sm font-medium text-gray-900">Your Review</label>
+        <textarea id="reviewText" rows="4" required
+                  class="block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline outline-2 outline-gray-300 focus:outline-4 focus:outline-indigo-600 sm:text-sm"
+                  placeholder="Write your review here..."></textarea>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="flex justify-center mt-4">
+        <button type="submit" class="bg-blue-950 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">
+          Submit Review
+        </button>
+      </div>
+    </form>
+
+    <!-- Message -->
+    <p id="message" class="text-center mt-4 text-sm"></p>
+  </div>
+</div>
+<script>
+  const userId = localStorage.getItem("loggedInUserId");
+  console.log("Logged-in user ID:", userId);
+
+  // Load events user is subscribed to
+  fetch(`/api/subscriptions/user/${userId}`)
+      .then(res => {
+          if (!res.ok) {
+              throw new Error("Failed to fetch events");
+          }
+          return res.json();
+      })
+      .then(events => {
+          console.log("Fetched events:", events);
+          const select = document.getElementById("eventSelect");
+          if (!events || events.length === 0) {
+              const opt = document.createElement("option");
+              opt.disabled = true;
+              opt.selected = true;
+              opt.textContent = "No subscribed events found.";
+              select.appendChild(opt);
+          } else {
+              events.forEach(event => {
+                  const option = document.createElement("option");
+                  option.value = event.id;
+                  option.textContent = event.title;
+                  select.appendChild(option);
+              });
+          }
+      })
+      .catch(error => {
+          console.error("Error fetching events:", error);
+          const select = document.getElementById("eventSelect");
+          const opt = document.createElement("option");
+          opt.disabled = true;
+          opt.selected = true;
+          opt.textContent = "Could not load events.";
+          select.appendChild(opt);
+      });
+
+  // Submit review
+  document.getElementById("reviewForm").addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const eventId = document.getElementById("eventSelect").value;
+      const rating = document.getElementById("rating").value;
+      const comment = document.getElementById("reviewText").value;
+
+      fetch("/api/reviews", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+              userId: parseInt(userId),
+              eventId: parseInt(eventId),
+              rating: parseInt(rating),
+              comment: comment
+          })
+      })
+      .then(res => res.json())
+      .then(data => {
+          const msg = document.getElementById("message");
+          msg.textContent = data.message || "Review submitted!";
+          msg.className = "text-green-600";
+      })
+      .catch(() => {
+          const msg = document.getElementById("message");
+          msg.textContent = "Something went wrong. Try again.";
+          msg.className = "text-red-600";
+      });
+  });
+
+  // Log out button functionality
+  document.querySelector('a[href="#logout"]').addEventListener("click", function (e) {
+    e.preventDefault();
+    localStorage.removeItem("loggedInUserId");
+    localStorage.removeItem("loggedInUsername");
+    window.location.href = "/login";
+  });
+</script>

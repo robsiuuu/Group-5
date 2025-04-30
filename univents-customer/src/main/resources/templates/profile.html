@@ -15,14 +15,13 @@
             <div class="flex items-center">
                 <img class="h-32 w-32" src="/UniVents.png" alt="UniVents">
                 <div class="ml-10 flex items-baseline space-x-4">
-                    <a href="home.html" class="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-blue-900">Dashboard</a>
-                    <a href="view-events.html" class="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-blue-900">View Events</a>
-                    <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-blue-900">About Us</a>
+                    <a href="home" class="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-blue-900">Dashboard</a>
+                    <a href="view-events" class="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-blue-900">View Events</a>
                 </div>
             </div>
             <div class="ml-4 flex items-center space-x-4">
-                <a href="profile.html" class="rounded-md px-6 py-2 bg-gray-800 text-white hover:text-red">Profile</a>
-                <button id="logoutButton" class="rounded-md px-6 py-2 bg-red-600 text-white hover:bg-red-700">Log Out</button>
+                <a href="write-review" class="rounded-md px-6 py-2 bg-gray-800 text-white hover:text-red">Reviews</a>
+                <button id="logoutButton" class="rounded-md px-6 py-2 bg-gray-800 text-white hover:bg-red-700">Log Out</button>
             </div>
         </div>
     </div>
@@ -64,11 +63,16 @@
             </div>
 
             <!-- Save Button -->
-            <div class="flex justify-center mt-4">
+            <div class="flex justify-center gap-4 mt-4">
                 <button type="button" id="saveProfile" class="bg-blue-950 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
                     Save Profile
                 </button>
+            <!-- Subscriptions Button -->
+                <a href="subscriptions" class="bg-gray-800 text-white px-6 py-2 rounded-lg hover:bg-gray-600 transition text-center">
+                    View My Subscriptions
+                </a>
             </div>
+
         </form>
 
         <!-- Success/Error Messages -->
@@ -76,7 +80,7 @@
     </div>
 </div>
 
-<!-- JavaScript for Profile Updates -->
+<!-- Profile Updates -->
 <script>
     // Get the logged-in user's ID from localStorage
     const userId = localStorage.getItem("loggedInUserId");
