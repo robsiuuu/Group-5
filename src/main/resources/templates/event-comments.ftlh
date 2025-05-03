@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-blue-950">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comment Section with Reply</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-blue-100">
+
+<nav class="bg-blue-950 border-b-4 border-black fixed top-0 w-full z-50">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="flex h-[7vw] items-center justify-between">
+            <!--Logo -->
+            <div class="flex items-center space-x-6">
+                <img class="h-20 w-20" src="/static/images/UniVents.png" alt="UniVents">
+
+                <!-- Links -->
+                <div class="flex space-x-6">
+                    <a href="/users/home" class="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-blue-900 hover:text-white">Dashboard</a>
+                    <a href="/events/all" class="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-blue-900 hover:text-white">View Events</a>
+                    <a href="/events/myEvents" class="rounded-md underline px-3 py-2 text-sm font-medium text-white">Manage Events</a>
+                    <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-blue-900 hover:text-white">About Us</a>
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-6">
+                <!-- Notifications -->
+                <button type="button" class="relative text-gray-400 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                    <span class="sr-only">View notifications</span>
+                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
+                    </svg>
+                </button>
+
+                <!-- Profile dropdown -->
+                <div class="relative">
+                    <button id="user-menu-button" class="flex items-center rounded-full bg-gray-800 text-sm focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" onclick="toggleUserMenu()">
+                        <img class="w-10 h-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="User Profile">
+                    </button>
+                    <div id="user-menu" class="hidden absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 ring-1 shadow-lg ring-black/5">
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700">Your Profile</a>
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700">Settings</a>
+                        <a href="/users/logout" class="block px-4 py-2 text-sm text-gray-700">Sign out</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</nav>
+
+<ul role="list" class="divide-y divide-gray-200 pt-[100px] bg-white">
+
+    <section class="bg-white py-8 lg:py-16 antialiased mt-[80px]">
+        <div class="max-w-2xl mx-auto px-4">
+            <h2 class="text-lg lg:text-2xl font-bold text-gray-900 mb-6">Comments (3)</h2>
+
+            <!-- Comment 1 -->
+            <article class="p-6 text-base bg-white rounded-lg shadow">
+                <footer class="flex justify-between items-center mb-2">
+                    <p class="text-sm font-semibold text-gray-900">User Name</p>
+                    <p class="text-sm text-gray-600">Feb. 8, 2025</p>
+                </footer>
+                <p class="text-gray-500">Great Event! Enjoyed meeting lots of new people and being outside.</p>
+
+                <div class="flex items-center mt-4 space-x-4">
+                    <button onclick="openModal(this)" class="reply-button text-sm text-gray-500 hover:underline">Reply</button>
+                </div>
+
+                <div class="replies mt-4 ml-6 space-y-2"></div>
+            </article>
+
+            <!-- Comment 2 -->
+            <article class="p-6 text-base bg-white rounded-lg shadow mt-4">
+                <footer class="flex justify-between items-center mb-2">
+                    <p class="text-sm font-semibold text-gray-900">User Name 2</p>
+                    <p class="text-sm text-gray-600">Feb. 12, 2025</p>
+                </footer>
+                <p class="text-gray-500">Thanks! Enjoyed the music.</p>
+
+                <div class="flex items-center mt-4 space-x-4">
+                    <button onclick="openModal(this)" class="reply-button text-sm text-gray-500 hover:underline">Reply</button>
+                </div>
+
+                <div class="replies mt-4 ml-6 space-y-2"></div>
+            </article>
+
+            <!-- Comment 3 -->
+            <article class="p-6 text-base bg-white rounded-lg shadow mt-4">
+                <footer class="flex justify-between items-center mb-2">
+                    <p class="text-sm font-semibold text-gray-900">User Name 3</p>
+                    <p class="text-sm text-gray-600">March. 12, 2025</p>
+                </footer>
+                <p class="text-gray-500">I left an item. Any way to contact you?.</p>
+
+                <div class="flex items-center mt-4 space-x-4">
+                    <button onclick="openModal(this)" class="reply-button text-sm text-gray-500 hover:underline">Reply</button>
+                </div>
+
+                <div class="replies mt-4 ml-6 space-y-2"></div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Reply Modal -->
+    <div id="replyModal" class="fixed inset-0 hidden bg-black bg-opacity-50 flex items-center justify-center">
+        <div class="bg-white p-6 rounded-lg shadow-lg max-w-md w-full">
+            <h2 class="text-lg font-semibold text-gray-900 mb-4">Reply to Comment</h2>
+            <textarea id="replyText" rows="4" class="w-full p-2 border rounded-md" placeholder="Write your reply..."></textarea>
+            <div class="flex justify-end mt-4 space-x-2">
+                <button onclick="closeModal()" class="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600">Cancel</button>
+                <button onclick="postReply()" id="postReplyBtn" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">Post Reply</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentReplyContainer = null;
+        let editMode = false;
+        let currentEditReply = null;
+
+        function openModal(button) {
+            currentReplyContainer = button.closest("article").querySelector(".replies");
+            document.getElementById("replyModal").classList.remove("hidden");
+            document.getElementById("replyText").value = "";
+            editMode = false;
+            currentEditReply = null;
+            document.getElementById("postReplyBtn").innerText = "Post Reply";
+        }
+
+        function closeModal() {
+            document.getElementById("replyModal").classList.add("hidden");
+        }
+
+        function postReply() {
+            const replyText = document.getElementById("replyText").value.trim();
+            if (replyText === "") {
+                alert("Reply cannot be empty!");
+                return;
+            }
+
+            if (editMode) {
+                currentEditReply.querySelector(".reply-text").innerText = replyText;
+                closeModal();
+                return;
+            }
+
+            const replyElement = document.createElement("div");
+            replyElement.classList.add("p-3", "bg-gray-100", "rounded-md", "text-sm", "shadow", "flex", "flex-col");
+
+            replyElement.innerHTML = `
+                <div class="flex justify-between items-center">
+                    <p class="font-semibold text-gray-900">You</p>
+                    <div class="flex space-x-2">
+                        <button onclick="editReply(this)" class="text-xs text-blue-600 hover:underline">Edit</button>
+                        <button onclick="removeReply(this)" class="text-xs text-red-600 hover:underline">Remove</button>
+                    </div>
+                </div>
+                <p class="reply-text text-gray-600 mt-1">${replyText}</p>
+            `;
+
+            currentReplyContainer.appendChild(replyElement);
+
+            closeModal();
+        }
+
+        function removeReply(button) {
+            const reply = button.closest("div.p-3");
+            reply.remove();
+        }
+
+        function editReply(button) {
+            const replyElement = button.closest("div.p-3");
+            const replyText = replyElement.querySelector(".reply-text").innerText;
+
+            document.getElementById("replyText").value = replyText;
+            document.getElementById("replyModal").classList.remove("hidden");
+            document.getElementById("postReplyBtn").innerText = "Save Changes";
+
+            editMode = true;
+            currentEditReply = replyElement;
+        }
+    </script>
+</ul>
+</body>
+</html>

@@ -10,58 +10,51 @@
 <nav class="bg-blue-950 border-b-4 border-black fixed top-0 w-full z-50">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="flex h-[7vw] items-center justify-between">
+            <!--Logo -->
             <div class="flex items-center space-x-6">
-                <img class="h-20 w-20" src="/images/UniVents.png" alt="UniVents">
+                <img class="h-20 w-20" src="/static/images/UniVents.png" alt="UniVents">
+
+                <!-- Links -->
                 <div class="flex space-x-6">
-                    <a href="#" class="rounded-md underline px-3 py-2 text-sm font-medium text-white">Dashboard</a>
-                    <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-blue-900">View Events</a>
-                    <a href="./view_events.html" class="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-blue-900">Manage Events</a>
-                    <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-blue-900">About Us</a>
+                    <a href="/users/home" class="rounded-md px-3 py-2 underline text-sm font-medium text-white hover:bg-blue-900 hover:text-white">Dashboard</a>
+                    <a href="/events/all" class="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-blue-900 hover:text-white">View Events</a>
+                    <a href="/events/myEvents" class="rounded-md px-3 py-2 text-sm font-medium text-white">Manage Events</a>
+                    <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-blue-900 hover:text-white">About Us</a>
                 </div>
             </div>
 
             <div class="flex items-center space-x-6">
-                <button type="button" class="relative text-gray-400 hover:text-white">
-                    <span class="sr-only">View notifications</span>
-                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                              d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0"/>
-                    </svg>
-                </button>
 
+                <!-- Profile dropdown -->
                 <div class="relative">
-                    <button id="user-menu-button" class="flex items-center rounded-full bg-gray-800 text-sm"
-                            onclick="toggleUserMenu()">
-                        <img class="w-10 h-10 rounded-full"
-                             src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                             alt="User Profile">
+                    <button id="user-menu-button" class="flex items-center rounded-full bg-gray-800 text-sm focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" onclick="toggleUserMenu()">
+                        <img class="w-10 h-10 rounded-full" src="/static/images/profile.png" alt="User Profile">
                     </button>
-                    <div id="user-menu"
-                         class="hidden absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 ring-1 shadow-lg ring-black/5">
-                        <a href="/user/userInfo" class="block px-4 py-2 text-sm text-gray-700">Your Profile</a>
-                        <a href="/logout" class="block px-4 py-2 text-sm text-gray-700">Sign out</a>
+                    <div id="user-menu" class="hidden absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 ring-1 shadow-lg ring-black/5">
+                        <a href="/users/userInfo" class="block px-4 py-2 text-sm text-gray-700">Your Profile</a>
+                        <a href="/users/loginForm" class="block px-4 py-2 text-sm text-gray-700">Sign out</a>
                     </div>
                 </div>
 
-                <script>
-                    function toggleUserMenu() {
-                        const menu = document.getElementById("user-menu");
-                        menu.classList.toggle("hidden");
-                    }
-
-                    document.addEventListener("click", function (event) {
-                        const menu = document.getElementById("user-menu");
-                        const button = document.getElementById("user-menu-button");
-
-                        if (!menu.contains(event.target) && !button.contains(event.target)) {
-                            menu.classList.add("hidden");
-                        }
-                    });
-                </script>
             </div>
         </div>
     </div>
 </nav>
+
+<script>
+    function toggleUserMenu() {
+        document.getElementById("user-menu").classList.toggle("hidden");
+    }
+
+    document.addEventListener("click", function(event) {
+        const menu = document.getElementById("user-menu");
+        const button = document.getElementById("user-menu-button");
+
+        if (!menu.contains(event.target) && !button.contains(event.target)) {
+            menu.classList.add("hidden");
+        }
+    });
+</script>
 
 <div class="ml-[20px] mt-[180px]">
     <div class="px-4 sm:px-0">

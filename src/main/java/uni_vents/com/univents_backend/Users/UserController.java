@@ -31,14 +31,19 @@ public class UserController {
         return new ResponseEntity<>(userService.getUserById(userId), HttpStatus.OK);
     }
 
-    @GetMapping("loginForm")
+    @GetMapping("/loginForm")
     public Object login() {
         return "user-login";
     }
 
-    @GetMapping("registerForm")
+    @GetMapping("/registerForm")
     public Object register(){
         return "user-register";
+    }
+
+    @GetMapping("/home")
+    public Object homePage(){
+        return "user-home";
     }
 
     /**
@@ -62,7 +67,7 @@ public class UserController {
             session.setAttribute("user", user);
 
             //redirect
-            return "redirect:/events/myEvents"; //or to home page/dashboard (not set up yet)
+            return "/user-home"; //or to home page/dashboard (not set up yet)
         } else {
             //this is an error mark to indicate invalid error or password which will be popped up in the front end
             model.addAttribute("error", "Invalid username or password");
@@ -104,6 +109,12 @@ public class UserController {
     @GetMapping("/delete/{userId}")
     public Object deleteUser(@PathVariable("userId") int userId, HttpSession session) {
         userService.deleteUser(userId);
+        session.invalidate();
+        return "redirect:/users/loginForm";
+    }
+
+    @GetMapping("/logout")
+    public Object logoutUser(HttpSession session) {
         session.invalidate();
         return "redirect:/users/loginForm";
     }

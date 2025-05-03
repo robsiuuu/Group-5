@@ -2,6 +2,8 @@ package uni_vents.com.univents_backend.Events;
 
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
+import uni_vents.com.univents_backend.Reviews.ReviewService;
+import uni_vents.com.univents_backend.Statistics.StatisticService;
 import uni_vents.com.univents_backend.Users.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,12 +32,18 @@ public class EventController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private StatisticService statisticService;
+
+    @Autowired
+    private ReviewService reviewService;
+
     @GetMapping("all")
     public Object getAllEvents(Model model) {
 //        return new ResponseEntity<>(service.getAllEvents(), HttpStatus.OK);
         model.addAttribute("eventList", service.getAllEvents());
         model.addAttribute("title", "All Events");
-        return "event-list";
+        return "events-all";
 
     }
 
@@ -57,10 +65,23 @@ public class EventController {
 
 
     @GetMapping("/{eventId}")
-    public Object getOneEvent(@PathVariable int eventId) {
-        return new ResponseEntity<>(service.getEventById(eventId), HttpStatus.OK);
+    public Object getOneEvent(@PathVariable int eventId, Model model) {
+        model.addAttribute("event", service.getEventById(eventId));
+        model.addAttribute("statistic", statisticService.getStatisticsByEvent(eventId));
+        model.addAttribute("title", "Event");
+        model.addAttribute("reviewList", reviewService.getReviewByEventId(eventId));
+        return "event-details";
 
     }
+
+    @GetMapping("/{eventId}/click")
+    public Object getClicks(@PathVariable int eventId, HttpSession session){
+        User user = (User) session.getAttribute("user");
+        Event event = service.getEventById(eventId);
+        statisticService.trackClick(event, user);
+        return "redirect:/events/{eventId}";
+    }
+
 
     @GetMapping("/name")
     public Object getEventsByName(@RequestParam(name = "search", defaultValue = "") String search) {

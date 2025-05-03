@@ -35,6 +35,7 @@ public class ReviewService {
         return reviewRepository.findById(reviewId);
     }
 
+    public Object getReviewByEventId(int eventId){return reviewRepository.findByEventId(eventId);}
 
     public void addNewReview(Review review, int eventId) {
         Optional<Event> eventOptional = eventRepository.findById(eventId);

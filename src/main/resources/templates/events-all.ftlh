@@ -18,8 +18,8 @@
 
                     <!-- Links -->
                     <div class="flex space-x-6">
-                        <a href="/users/home" class="rounded-md px-3 py-2 underline text-sm font-medium text-white hover:bg-blue-900 hover:text-white">Dashboard</a>
-                        <a href="/events/all" class="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-blue-900 hover:text-white">View Events</a>
+                        <a href="/users/home" class="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-blue-900 hover:text-white">Dashboard</a>
+                        <a href="/events/all" class="rounded-md underline px-3 py-2 text-sm font-medium text-white hover:bg-blue-900 hover:text-white">View Events</a>
                         <a href="/events/myEvents" class="rounded-md px-3 py-2 text-sm font-medium text-white">Manage Events</a>
                         <a href="#" class="rounded-md px-3 py-2 text-sm font-medium text-white hover:bg-blue-900 hover:text-white">About Us</a>
                     </div>
@@ -62,17 +62,6 @@
     <main class="pt-24">
         <!-- Create Events-->
         <div class="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
-            <div class="max-w-2xl ml-auto mr-auto events_header">
-                <img src="/static/images/campevents.png" alt="UNCG Events" class="absolute left-1/2 top-[15vh] -z-10 md:w-[50%] lg:w-[35%] object-cover object-center brightness-[40%] transform -translate-x-1/2 border-2 border-black rounded-lg">
-                <div class="relative flex flex-col items-center justify-center text-center mt-[90px]">
-                    <h1 class="text-3xl font-bold text-white">Manage/Create New Events</h1>
-                    <a href="/events/createForm">
-                        <button class="mt-4 px-6 py-2 bg-gray-800 text-white rounded-md hover:bg-blue-900">
-                            Create New Event
-                        </button>
-                    </a>
-                </div>
-            </div>
 
 
             <div class="mt-[150px] text-center text-3xl">
@@ -82,7 +71,7 @@
             <ul role="list" class="mt-6 divide-y divide-gray-200">
                 <#list eventList as event>
                 <li class="flex justify-between items-center gap-x-6 py-5">
-                    <a class="block flex-1 min-w-0 p-0 rounded-lg hover:bg-gray-100" href="/events/${event.eventId}">
+                    <a class="block flex-1 min-w-0 p-0 rounded-lg hover:bg-gray-100" href="/events/${event.eventId}/click">
                         <div class="flex items-center gap-x-4">
                             <div class="min-w-0 flex-auto">
                                 <p class="text-sm font-semibold text-gray-900 truncate">${event.eventName}</p>

@@ -7,8 +7,10 @@ import uni_vents.com.univents_backend.Users.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+
 
 @Service
 public class StatisticService {
@@ -71,5 +73,29 @@ public class StatisticService {
             throw new RuntimeException("Statistic not found with id: " + statisticId);
         }
         statisticRepository.deleteById(statisticId);
+    }
+
+    public void trackClick(Event event, User user) {
+        Optional<Statistic> existingStatsList = statisticRepository.findByEventAndUser(event, user);
+        if(existingStatsList.isPresent()){
+            Statistic stat = existingStatsList.get();
+            stat.setStatisticData(stat.getStatisticData() + 1);
+            stat.setStatisticUpdatedAt(new Date());
+            statisticRepository.save(stat);
+        } else{
+            Statistic newStatistic = new Statistic(
+                    event,
+                    "Clicks",
+                    "Number of clicks by users ",
+                    1,
+                    new Date(),
+                    new Date(),
+                    user
+            );
+            statisticRepository.save(newStatistic);
+        }
+
+
+
     }
 }
