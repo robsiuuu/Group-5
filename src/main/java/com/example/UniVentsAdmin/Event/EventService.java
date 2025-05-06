@@ -1,27 +1,62 @@
 package com.example.UniVentsAdmin.Event;
 
+import com.example.UniVentsAdmin.User.User;
+import com.example.UniVentsAdmin.User.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
 import java.util.List;
 
 @Service
 public class EventService {
 
-    private final EventRepository eventRepository;
+    @Autowired
+    private EventRepository eventRepository;
 
     @Autowired
-    public EventService(EventRepository eventRepository) {
-        this.eventRepository = eventRepository;
-    }
+    private UserRepository userRepository;
 
-    // get all events
+
     public List<Event> getAllEvents() {
         return eventRepository.findAll();
     }
 
-    // ban an event by id
-    public void deleteEvent(int eventId) {
+
+    public Event getEventById(int eventId) {
+        return eventRepository.findById(eventId).orElse(null);
+    }
+
+
+    public List<Event> getEventsByLocation(String location) {
+        return eventRepository.getEventsByLocation(location);
+    }
+
+    public List<Event> getEventsByUser(User user) {
+        return eventRepository.getEventsByCreator(user.getUserId());
+    }
+
+    public List<Event> getEventsByDate(Date eventDate) {
+        return eventRepository.getEventsByDate(eventDate);
+    }
+
+    public List<Event> getEventsByName(String name) {
+        return eventRepository.getEventsByName(name);
+    }
+
+    public void addNewEvent(Event event) {
+        eventRepository.save(event);
+    }
+
+    public void updateEvent(Event event) {
+        eventRepository.save(event);
+    }
+
+    public void deleteEventById(int eventId) {
         eventRepository.deleteById(eventId);
     }
+
+
+
 
 }

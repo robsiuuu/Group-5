@@ -1,56 +1,103 @@
 package com.example.UniVentsAdmin.Event;
 
+import com.example.UniVentsAdmin.Reviews.Review;
+import com.example.UniVentsAdmin.Statistics.Statistic;
 import com.example.UniVentsAdmin.User.User;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import com.fasterxml.jackson.annotation.*;
-
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
+import java.util.List;
+import org.springframework.format.annotation.DateTimeFormat;
+
 
 @Entity
 @Table(name = "events")
 public class Event {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int eventId;
 
     @ManyToOne
-    @JoinColumn(name = "creatorId", nullable = false)
-    @JsonIgnore // This prevents Jackson from serializing the full User object
-    private User creator; // References the User who created the event
+    @JoinColumn(name = "creator_id", nullable = false)
+    private User creator;
 
     @Column(nullable = false)
     private String eventName;
-    private String eventLocation;
-    private String eventGenre;
 
     @Column(nullable = false)
-    private Date eventDate = new Date();
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date eventDate;
 
-    // Constructors
-    public Event(User creator, String eventName, String eventLocation, String eventGenre, Date eventDate) {
+    @Column(nullable = false)
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    @DateTimeFormat(pattern = "HH:mm")
+    private Date eventTime;
+
+    @Column(nullable = false)
+    private String eventLocation;
+
+    @OneToMany
+    @JsonManagedReference("event-statistic")
+    private List<Statistic> statistics;
+
+    @OneToMany
+    @JsonManagedReference("event-review")
+    private List<Review> reviews;
+
+
+    private String eventDescription;
+
+    private double latitude;
+    private double longitude;
+
+
+
+    public Event(int eventId, String eventName, Date eventDate, Date eventTime, String eventLocation) {
+        this.eventId = eventId;
+        this.eventName = eventName;
+        this.eventDate = eventDate;
+        this.eventTime = eventTime;
+        this.eventLocation = eventLocation;
+
+    }
+
+    public Event(String eventName, Date eventDate, Date eventTime, String eventLocation) {
+        this.eventName = eventName;
+        this.eventDate = eventDate;
+        this.eventTime = eventTime;
+        this.eventLocation = eventLocation;
+
+
+    }
+
+    public Event(User creator, String eventName, Date eventDate, Date eventTime, String eventLocation) {
         this.creator = creator;
         this.eventName = eventName;
-        this.eventLocation = eventLocation;
-        this.eventGenre = eventGenre;
         this.eventDate = eventDate;
+        this.eventTime = eventTime;
+        this.eventLocation = eventLocation;
     }
 
-    public Event() {
+    public Event(){
+
     }
 
-    // Getters and setters
-    @JsonProperty("creator")
-    public String getCreatorUsername() {
-        return creator != null ? creator.getUsername() : null;
+    public double getLatitude(){
+        return latitude;
     }
 
-    public User getCreator() {
-        return creator;
+    public void setLatitude(double latitude){
+        this.latitude = latitude;
     }
 
-    public void setCreator(User creator) {
-        this.creator = creator;
+    public double getLongitude(){
+        return longitude;
+    }
+
+    public void setLongitude(double longitude){
+        this.longitude = longitude;
     }
 
     public int getEventId() {
@@ -61,28 +108,20 @@ public class Event {
         this.eventId = eventId;
     }
 
+    public User getCreator() {
+        return creator;
+    }
+
+    public void setCreator(User creator) {
+        this.creator = creator;
+    }
+
     public String getEventName() {
         return eventName;
     }
 
     public void setEventName(String eventName) {
         this.eventName = eventName;
-    }
-
-    public String getEventLocation() {
-        return eventLocation;
-    }
-
-    public void setEventLocation(String eventLocation) {
-        this.eventLocation = eventLocation;
-    }
-
-    public String getEventGenre() {
-        return eventGenre;
-    }
-
-    public void setEventGenre(String eventGenre) {
-        this.eventGenre = eventGenre;
     }
 
     public Date getEventDate() {
@@ -93,16 +132,45 @@ public class Event {
         this.eventDate = eventDate;
     }
 
+    public Date getEventTime() {
+        return eventTime;
+    }
+
+    public void setEventTime(Date eventTime) {
+        this.eventTime = eventTime;
+    }
+
+    public String getEventLocation() {
+        return eventLocation;
+    }
+
+    public void setEventLocation(String eventLocation) {
+        this.eventLocation = eventLocation;
+    }
+
+    public List<Statistic> getStatistics() {
+        return statistics;
+    }
+
+    public void setStatistics(List<Statistic> statistics) {
+        this.statistics = statistics;
+    }
+
+    public String getEventDescription() {return eventDescription;}
+
+    public void setEventDescription(String eventDescription) {this.eventDescription = eventDescription;}
+
     @Override
-    public String toString() {
+    public String toString(){
         return "Event{" +
                 "eventId=" + eventId +
-                ", creator=" + creator +
-                ", eventName='" + eventName + '\'' +
-                ", eventLocation='" + eventLocation + '\'' +
-                ", eventGenre='" + eventGenre + '\'' +
-                ", eventDate=" + eventDate +
+                "creator=" + creator +
+                "eventName=" + eventName +
+                "eventDate=" + eventDate +
+                "eventTime=" + eventTime +
+                "eventLocation=" + eventLocation +
                 '}';
+
     }
 
 }

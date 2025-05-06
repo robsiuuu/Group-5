@@ -1,0 +1,53 @@
+package com.example.UniVentsAdmin.Reviews;
+
+
+import com.example.UniVentsAdmin.Event.Event;
+import com.example.UniVentsAdmin.Event.EventRepository;
+import com.example.UniVentsAdmin.Replies.ReplyRepository;
+import com.example.UniVentsAdmin.User.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class ReviewService {
+    @Autowired
+    private ReviewRepository reviewRepository;
+
+    @Autowired
+    private ReplyRepository replyRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private EventRepository eventRepository;
+
+    public Object getReviewsForUser(int userId) {
+        return reviewRepository.findById(userId);
+    }
+
+    public Object getReviewById(int reviewId) {
+        return reviewRepository.findById(reviewId);
+    }
+
+    public Object getReviewByEventId(int eventId){return reviewRepository.findByEventId(eventId);}
+
+    public void addNewReview(Review review, int eventId) {
+        Optional<Event> eventOptional = eventRepository.findById(eventId);
+
+        if (eventOptional.isEmpty()) {
+            throw new RuntimeException("Event with ID " + eventId + " does not exist.");
+        }
+
+        review.setEvent(eventOptional.get());
+        reviewRepository.save(review);
+    }
+
+    public void deleteReviewById(int reviewId) {
+        reviewRepository.deleteById(reviewId);
+    }
+}
