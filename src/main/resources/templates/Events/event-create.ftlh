@@ -83,7 +83,7 @@
     </form>
 </div>
 <!-- Include the Google Maps JavaScript API -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQGCeu1zzNrIiNVPwNTRonHAS3bwvZOJA&libraries=places"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=KEYHERE&libraries=places"></script>
 
 <script>
     function initAutocomplete() {
