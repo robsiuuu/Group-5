@@ -1,4 +1,4 @@
-##To Run Project run the UniVents Application.
+## To Run Project run the UniVents Application.
 
 Either sign up or login in. 
 # The users ready to log in are:
